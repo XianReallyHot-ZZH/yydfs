@@ -12,6 +12,7 @@ yydfs:
   autoMd5: true
   group: C8090
   backupUrl: http://localhost:8091/upload
+  ## 后面这个隐藏掉，不用配置，程序自动检测本地ip+端口，实现下载地址的自动识别
   downloadUrl: http://localhost:8090/download
 
 logging:
@@ -23,3 +24,8 @@ logging:
 
 server:
   port: 8090
+
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: yydfs-producer

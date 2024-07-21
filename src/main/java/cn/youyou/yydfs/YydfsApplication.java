@@ -3,16 +3,19 @@ package cn.youyou.yydfs;
 import cn.youyou.yydfs.config.YYDfsConfigProperties;
 import cn.youyou.yydfs.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 
 @Slf4j
 @SpringBootApplication
 @EnableConfigurationProperties(value = {YYDfsConfigProperties.class})
+@Import(RocketMQAutoConfiguration.class)
 public class YydfsApplication {
 
     public static void main(String[] args) {

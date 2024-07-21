@@ -3,6 +3,7 @@ package cn.youyou.yydfs.controller;
 import cn.youyou.yydfs.config.YYDfsConfigProperties;
 import cn.youyou.yydfs.meta.FileMeta;
 import cn.youyou.yydfs.syncer.HttpSyncer;
+import cn.youyou.yydfs.syncer.MQSyncer;
 import cn.youyou.yydfs.utils.FileUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,6 +29,9 @@ public class FileController {
 
     @Autowired
     private HttpSyncer httpSyncer;
+
+    @Autowired
+    private MQSyncer mqSyncer;
 
 
     /**
@@ -78,10 +82,11 @@ public class FileController {
                     e.printStackTrace();
                     // 同步失败转异步处理
                     log.error("sync file failed, try to async sync file to backup server...");
-
+                    mqSyncer.async(fileMeta);
                 }
             } else {    // 异步方式
                 log.info("async sync file to backup server...");
+                mqSyncer.async(fileMeta);
             }
         }
 
